@@ -12,12 +12,16 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "clientes")
+@Table(name = "ClientesRepository")
 public class Clientes {
 
     @Id
     @GeneratedValue
     private  Long id;
+
+    private String nome;
+
+    private int idade;
 
     private String email;
 
