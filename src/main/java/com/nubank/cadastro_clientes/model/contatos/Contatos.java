@@ -1,6 +1,7 @@
 package com.nubank.cadastro_clientes.model.contatos;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nubank.cadastro_clientes.model.clientes.Clientes;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,5 +23,6 @@ public class Contatos {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Clientes cliente;
 }

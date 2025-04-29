@@ -1,6 +1,8 @@
 package com.nubank.cadastro_clientes.model.clientes;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nubank.cadastro_clientes.model.contatos.Contatos;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "ClientesRepository")
+@Table(name = "Clientes")
 public class Clientes {
 
     @Id
@@ -32,7 +34,8 @@ public class Clientes {
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contatos> contatos = new ArrayList<>();
+    @JsonManagedReference
+    private List<Contatos> contatos = new ArrayList<Contatos>();
 
 
 }
