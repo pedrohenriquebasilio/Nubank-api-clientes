@@ -2,6 +2,7 @@ package com.nubank.cadastro_clientes.service.clientes;
 
 
 import com.nubank.cadastro_clientes.model.clientes.Clientes;
+import com.nubank.cadastro_clientes.model.contatos.Contatos;
 import com.nubank.cadastro_clientes.model.dto.request.ClienteRequestDTO;
 import com.nubank.cadastro_clientes.model.dto.response.ClienteResponseDTO;
 import com.nubank.cadastro_clientes.model.repository.ClientesRepository;
@@ -25,17 +26,27 @@ public class ClienteService {
         cliente.setEmail(dto.email());
         cliente.setTelefone(dto.telefone());
 
-       // cliente = ClientesRepository.(cliente);
+        Clientes savecliente = repository.save(cliente);
         return new ClienteResponseDTO(
-                cliente.getId(),
-                cliente.getNome(),
-                cliente.getIdade(),
-                cliente.getEmail(),
-                cliente.getCpf(),
-                cliente.getTelefone(),
-                cliente.getRg(),
+                savecliente.getNome(),
+                savecliente.getIdade(),
+                savecliente.getEmail(),
+                savecliente.getCpf(),
+                savecliente.getRg(),
+                savecliente.getTelefone(),
                 List.of()
         );
     }
+
+
+    public List<Clientes> getAllUsers() {
+        return repository.findAll(); }
+
+    public List<Contatos> findContatosById(Long id) {
+        Clientes cliente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return cliente.getContatos();
+    }
+
 
 }
